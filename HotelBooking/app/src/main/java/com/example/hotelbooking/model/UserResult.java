@@ -11,6 +11,18 @@ public class UserResult {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("checkIn")
+    @Expose
+    private String checkIn;
+    @SerializedName("checkOut")
+    @Expose
+    private String checkOut;
+    @SerializedName("numOfPeople")
+    @Expose
+    private String numOfPeople;
     @SerializedName("bookings")
     @Expose
     private List<Booking> bookings = null;
@@ -31,4 +43,35 @@ public class UserResult {
         this.bookings = bookings;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public String getNumOfPeople() {
+        return numOfPeople;
+    }
+
+    public void setNumOfPeople(String numOfPeople) {
+        this.numOfPeople = numOfPeople;
+    }
 }

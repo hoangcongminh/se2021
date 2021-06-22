@@ -1,15 +1,20 @@
 package com.example.hotelbooking.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,6 +24,7 @@ import com.example.hotelbooking.model.Booking;
 import com.example.hotelbooking.model.Room;
 import com.example.hotelbooking.model.RoomResult;
 import com.example.hotelbooking.Adapters.RecommendationAdapter;
+import com.example.hotelbooking.model.UserResult;
 import com.example.hotelbooking.model.UserRoom;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -37,6 +43,7 @@ public class RoomInfoActivity extends AppCompatActivity {
     Room room;
     int pos;
     RoomResult roomResult;
+    UserResult userResult = new UserResult();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +89,38 @@ public class RoomInfoActivity extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View layout = inflater.inflate(R.layout.confirm_booking_dialog, (ViewGroup)findViewById(R.id.layout_root));
 
-                setBooking(true);
-                finish();
+                EditText name = layout.findViewById(R.id.ed_name);
+                EditText phone = layout.findViewById(R.id.ed_phone);
+                EditText checkIn = layout.findViewById(R.id.ed_checkIn);
+                EditText checkOut = layout.findViewById(R.id.ed_checkOut);
+                EditText numOfPeople = layout.findViewById(R.id.ed_num);
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(RoomInfoActivity.this);
+                builder.setTitle("Confirm Booking");
+                builder.setView(layout);
+                builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        userResult.setName(name.toString());
+                        userResult.setPhone(phone.toString());
+                        userResult.setCheckIn(checkIn.toString());
+                        userResult.setCheckOut(checkOut.toString());
+                        userResult.setNumOfPeople(numOfPeople.toString());
+                        setBooking(true);
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
             }
         });
         draftBook.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +144,6 @@ public class RoomInfoActivity extends AppCompatActivity {
         } else {
             return null;
         }
-
     }
 
     private void setBooking(Boolean complete) {

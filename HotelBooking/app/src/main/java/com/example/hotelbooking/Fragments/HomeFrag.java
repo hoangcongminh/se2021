@@ -61,21 +61,17 @@ public class HomeFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            if (getArguments() != null) {
+                mParam1 = getArguments().getString(ARG_PARAM1);
+                mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View view=inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView=view.findViewById(R.id.roomList);
-
-
         return view;
     }
 
@@ -94,13 +90,12 @@ public class HomeFrag extends Fragment {
 
     public String getRooms(){
         SharedPreferences sp=getActivity().getSharedPreferences("room",Context.MODE_PRIVATE);
-        Gson gson=new Gson();
-        if(sp.contains("data")){
-
-            return sp.getString("data",null);
-        }
-        else{
-            return null;
+            Gson gson=new Gson();
+            if(sp.contains("data")){
+                return sp.getString("data",null);
+            }
+            else{
+                return null;
         }
 
     }

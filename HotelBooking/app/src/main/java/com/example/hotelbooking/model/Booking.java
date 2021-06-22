@@ -11,7 +11,8 @@ public class Booking {
     @SerializedName("user_room")
     @Expose
     private List<UserRoom> userRooms = new ArrayList<>();
-    //todo aaa
+
+
     public List<UserRoom> getUserRooms() {
         return userRooms;
     }

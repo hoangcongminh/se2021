@@ -149,7 +149,6 @@ public class Recommendation extends Fragment {
 
         if (getRooms() == null) {
 
-
             BufferedReader br = null;
             try {
                 br = new BufferedReader(new InputStreamReader(getActivity().getAssets().open("rooms.json")));
@@ -157,8 +156,6 @@ public class Recommendation extends Fragment {
                 e.printStackTrace();
             }
             roomResult = gson.fromJson(br, RoomResult.class);
-
-
         } else {
             roomResult = gson.fromJson(getRooms(), RoomResult.class);
         }

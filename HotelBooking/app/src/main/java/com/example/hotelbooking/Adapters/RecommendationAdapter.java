@@ -68,10 +68,18 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
         holder.bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                int vis = Integer.valueOf(rooms.get(position).getVisits());
+//                rooms.get(position).setVisits(String.valueOf(++vis));
+//                setRooms(new HashSet<>(rooms));
+//                Intent i = new Intent(context, RoomInfoActivity.class);
+//                i.putExtra("data", rooms.get(position));
+//                context.startActivity(i);
+
                 int vis = Integer.valueOf(rooms.get(position).getVisits());
                 rooms.get(position).setVisits(String.valueOf(++vis));
                 setRooms(new HashSet<>(rooms));
                 Intent i = new Intent(context, RoomInfoActivity.class);
+                i.putExtra("pos", position);
                 i.putExtra("data", rooms.get(position));
                 context.startActivity(i);
 
